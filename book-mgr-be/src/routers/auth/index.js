@@ -1,5 +1,7 @@
 const Router = require('@koa/router')
 const mongoose = require('mongoose')
+const { getBody } = require('../../helpers/utils/index')
+const jwt = require('jsonwebtoken')
 
 const User = mongoose.model('User')
 
@@ -8,12 +10,10 @@ const router = new Router({
 })
 
 router.post('/register', async (ctx) => {
-  console.log(ctx.request.body);
-  const { account, password } = ctx.request.body;
+  const { account, password } = getBody(ctx);
 
-  // Todo
   // 校验账号密码是否符合逻辑
-  const one = User.findOne({account}).exec();
+  const one = await User.findOne({account}).exec();
   if(one) {
     ctx.body = {
       code: 0,
@@ -26,7 +26,7 @@ router.post('/register', async (ctx) => {
   const user = new User({
     account,
     password,
-  })
+  })  
 
   const res = await user.save()
 
@@ -37,8 +37,39 @@ router.post('/register', async (ctx) => {
   }
 })
 
-router.get('/ login', async (ctx) => {
-  ctx.body = '登录成功'
+router.post('/login', async (ctx) => {
+  const { account, password } = getBody(ctx);
+  const one = await User.findOne({account}).exec()
+  
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '用户名或密码错误',
+      data: null,
+    }
+    return 
+  }
+  
+  if(one.password === password) {
+    const user = {
+      account: one.account,
+      _id: one._id,
+    }
+    ctx.body = {
+      code: 1,
+      msg: '登录成功',
+      data: {
+        user,
+        token: jwt.sign(user, 'book-mgr')
+      },
+    }
+  } else {
+    ctx.body = {
+      code: 0,
+      msg: '密码错误',
+      data: null,
+    }
+  }
 })
 
 module.exports = router

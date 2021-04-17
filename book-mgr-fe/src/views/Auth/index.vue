@@ -13,7 +13,7 @@
             <a-input
               size="large"
               placeholder="账号"
-
+              v-model:value="loginForm.account"
             >
               <template #prefix>
                 <UserOutlined />
@@ -24,6 +24,7 @@
             <a-input
               size="large"
               placeholder="密码"
+              v-model:value="loginForm.password"
             >
               <template #prefix>
                 <LockOutlined />
@@ -37,6 +38,7 @@
             <a-button
               size="large"
               type="primary"
+              @click="login"
             >登录</a-button>
           </div>
         </a-tab-pane>
