@@ -4,17 +4,42 @@ const { getBody } = require('../../helpers/utils/index')
 const jwt = require('jsonwebtoken')
 
 const User = mongoose.model('User')
+const InviteCode = mongoose.model('InviteCode')
 
 const router = new Router({
   prefix: '/auth',
 })
 
 router.post('/register', async (ctx) => {
-  const { account, password } = getBody(ctx);
+  const { 
+    account,
+    password, 
+    inviteCode 
+  } = getBody(ctx);
 
+  if(account === '' || password === '' || inviteCode === '') {
+    ctx.body = {
+      code: 0,
+      msg: '字段不能为空',
+      data: null,
+    }
+    return
+  }
+  
+  // 校验邀请码是否正确
+  const findCode = await InviteCode.findOne({code: inviteCode}).exec();
+  if((!findCode) || findCode.user) {
+    ctx.body = {
+      code: 0,
+      msg: '邀请码不正确',
+      data: null,
+    }
+    return
+  }
+  
   // 校验账号密码是否符合逻辑
-  const one = await User.findOne({account}).exec();
-  if(one) {
+  const findUser = await User.findOne({account}).exec();
+  if(findUser) {
     ctx.body = {
       code: 0,
       msg: '账户已存在',
@@ -29,6 +54,10 @@ router.post('/register', async (ctx) => {
   })  
 
   const res = await user.save()
+  
+  findCode.user = user._id
+  findCode.meta.updateAt = (new Date()).getTime()
+  await findCode.save()
 
   ctx.body = {
     code: 1,

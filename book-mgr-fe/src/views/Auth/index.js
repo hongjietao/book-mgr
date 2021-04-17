@@ -1,6 +1,7 @@
 import { defineComponent, reactive } from 'vue'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue'
 import { auth } from '@/service'
+import { result } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 
 export default defineComponent({
@@ -14,6 +15,7 @@ export default defineComponent({
     const regForm = reactive({
       account: '',
       password: '',
+      inviteCode: '',
     })
     // 注册逻辑
     const register = async () => {
@@ -25,16 +27,18 @@ export default defineComponent({
         message.info('请输入密码')
         return
       }
-
-      const { data } = await auth.register(regForm.account.trim(), regForm.password.trim())
-
-      if(data.code) {
-        message.success(data.msg)
+      if(regForm.inviteCode.trim() === '') {
+        message.info('请输入邀请码')
         return
       }
-      message.error(data.msg)
-    }
 
+      const res = await auth.register(regForm.account.trim(), regForm.password.trim(), regForm.inviteCode.trim())
+
+      result(res)
+        .success((data) => {
+          message.success(data.msg)
+        })
+    }
     // 登录账户表单
     const loginForm = reactive({
       account: '',
