@@ -24,9 +24,18 @@
         <template #publishDate="record">
           {{formatTimestamp(record.record.publishDate)}}
         </template>
+        <template #count="record">
+          {{record.record.count?record.record.count:0}}
+          &nbsp;
+          <a type="link" @click="updateCount('IN_COUNT', record.record)">入库</a>
+          &nbsp;
+          <a type="link" @click="updateCount('OUT_COUNT', record.record)">出库</a>
+        </template>
 
         <template #actions="record">
-          <a @click="remove(record)">delete</a>
+          <a type="link" @click="update(record.record)">edit</a>
+          &nbsp;
+          <a type="link" @click="remove(record)">delete</a>
         </template>
       </a-table>
       <space-between style="margin-top: 24px">
@@ -43,9 +52,14 @@
     <add-one
       v-model:show="show"
     />
+    <update
+      v-model:show="showUpdateModel"
+      :book="curEditBook"
+      @update="updateCurBook"
+    />
   </div>
 </template>
-<script src='./index.js'></script>
+<script src='./index.jsx'></script>
 <style lang="scss" scoped>
   @import './index.scss';
 </style>

@@ -2,7 +2,13 @@ const mongoose = require('mongoose')
 const Router = require('@koa/router')
 const { getBody } = require('../../helpers/utils/index')
 
+const BOOK_COUNT = {
+  IN: "IN_COUNT",
+  OUT: "OUT_COUNT",
+}
+
 const Book = mongoose.model('Book')
+
 
 const router = new Router({
   prefix: '/book',
@@ -15,6 +21,7 @@ router.post('/add', async (ctx) => {
     author,
     publishDate,
     classify,
+    count,
   } = getBody(ctx)
 
   const book = new Book({
@@ -23,6 +30,7 @@ router.post('/add', async (ctx) => {
     author,
     publishDate,
     classify,
+    count,
   })
 
   const res = await book.save()
@@ -86,6 +94,92 @@ router.delete('/:id', async (ctx) => {
     msg: '删除成功',
   }
 
+})
+
+router.post('/update/count', async (ctx) => {
+  const {
+    id,
+    type,
+  } = ctx.request.body
+  
+  let { num } = ctx.request.body
+  num = Number(num)
+
+  let book = await Book.findOne({
+    _id: id,
+  }).exec()
+
+  if(!book) {
+    ctx.body = {
+      code: 0,
+      msg: '未找到书籍'
+    }
+    return
+  }
+
+  if(type === BOOK_COUNT.IN) {
+    num = Math.abs(num)
+  } else {
+    num = -Math.abs(num)
+  }
+
+  book.count = book.count + num
+
+  if(book.count < 0) {
+    ctx.body = {
+      code: 0,
+      msg: '剩余书籍数量不足以出库',
+    }
+  }
+  const res = await book.save()
+
+  ctx.body = {
+    code: 1,
+    data: res,
+    msg: '操作成功'
+  }
+
+})
+
+router.post('/update', async (ctx) => {
+  const {
+    id,
+    // name,
+    // price,
+    // author,
+    // publishDate,
+    // classify,
+    ...others
+  } = ctx.request.body
+
+  const one = await Book.findOne({
+    _id: id
+  }).exec()
+
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '没有找到书籍',
+    }
+    return ;
+  }
+
+  const newQuery = {}
+  Object.entries(others).forEach(([key, value])=>{
+    if(value) {
+      newQuery[key] = value
+    }
+  })
+
+  Object.assign(one, newQuery)
+
+  const res = await one.save()
+
+  ctx.body = {
+    code: 1,
+    data: res,
+    msg: '修改成功',
+  }
 })
 
 module.exports = router
