@@ -2,8 +2,8 @@
   <div class="auth">
     <div class="bg"></div>
     <div class="title-info">
-      <img src="https://ncstatic.clewm.net/rsrc/2020/1016/02/4757e4910cb527fc040d019a93ded74f.png?x-oss-process=image/resize,w_750/format,gif/sharpen,100/quality,Q_80/interlace,1/auto-orient,1" alt="">
-      <h2 class="title">图书管理系统 后台 </h2>
+      <img src="@/assets/img/house-icon.png" alt="房源图片">
+      <h2 class="title">房源租售管理系统后台 </h2>
     </div>
 
     <div class="form">

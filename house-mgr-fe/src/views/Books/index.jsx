@@ -1,4 +1,5 @@
 import { defineComponent, ref, onMounted, createVNode } from 'vue'
+import { useRouter } from 'vue-router'
 import AddOne from './AddOne/index.vue'
 import Update from './Update/index.vue'
 import { book } from '@/service'
@@ -58,6 +59,7 @@ export default defineComponent({
     const curPage = ref(1)
     const keyword = ref('')
     const isSearch = ref(false)
+    const router = useRouter()
 
     // 获取所有数据
     const getList = async () => {
@@ -123,7 +125,7 @@ export default defineComponent({
     // 从查询状态返回至所有数据
     const backAll = () => {
       keyword.value = ''
-      isSearch.value = false,
+      isSearch.value = false
       getList()
     }
 
@@ -145,8 +147,14 @@ export default defineComponent({
       curEditBook.value = record
     }
 
+    // 更新书籍信息
     const updateCurBook = (newData) => {
       Object.assign(curEditBook.value, newData)
+    }
+
+    // 进入详情页面
+    const toDetail = async (record) => {
+      router.push(`/books/${record._id}`)
     }
     onMounted(async () => {
       getList()
@@ -170,6 +178,7 @@ export default defineComponent({
       update,
       curEditBook,
       updateCurBook,
+      toDetail,
     }
   }
 })

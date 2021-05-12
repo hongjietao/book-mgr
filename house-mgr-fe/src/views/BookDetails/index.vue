@@ -14,21 +14,21 @@
         <div class="items">
           <div class="item">
             <div class="title">价格</div>
-            <div class="content">price</div>
+            <div class="content">{{d.price}}</div>
           </div>
           <div class="item">
             <div class="title">作者</div>
-            <div class="content">author</div>
+            <div class="content">{{d.author}}</div>
           </div>
           <div class="item">
             <div class="title">分类</div>
-            <div class="content">classify</div>
+            <div class="content">{{d.classify}}</div>
           </div>
         </div>
         <div class="items">
           <div class="item">
             <div class="title">出版日期</div>
-            <div class="content">publish date</div>
+            <div class="content">{{formatTimestamp(d.publishDate)}}</div>
           </div>
         </div>
       </div>

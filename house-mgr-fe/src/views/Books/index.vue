@@ -33,6 +33,8 @@
         </template>
 
         <template #actions="record">
+          <a type="link" @click="toDetail(record.record)">detail</a>
+          &nbsp;
           <a type="link" @click="update(record.record)">edit</a>
           &nbsp;
           <a type="link" @click="remove(record)">delete</a>

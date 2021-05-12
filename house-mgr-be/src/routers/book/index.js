@@ -9,6 +9,12 @@ const BOOK_COUNT = {
 
 const Book = mongoose.model('Book')
 
+const findOneBook = async (id) => {
+  const one = await Book.findOne({
+    _id: id,
+  }).exec()
+  return one
+}
 
 const router = new Router({
   prefix: '/book',
@@ -105,9 +111,7 @@ router.post('/update/count', async (ctx) => {
   let { num } = ctx.request.body
   num = Number(num)
 
-  let book = await Book.findOne({
-    _id: id,
-  }).exec()
+  let book = await findOneBook(id)
 
   if(!book) {
     ctx.body = {
@@ -144,17 +148,10 @@ router.post('/update/count', async (ctx) => {
 router.post('/update', async (ctx) => {
   const {
     id,
-    // name,
-    // price,
-    // author,
-    // publishDate,
-    // classify,
     ...others
   } = ctx.request.body
 
-  const one = await Book.findOne({
-    _id: id
-  }).exec()
+  const one = await findOneBook(id)
 
   if(!one) {
     ctx.body = {
@@ -180,6 +177,29 @@ router.post('/update', async (ctx) => {
     data: res,
     msg: '修改成功',
   }
+})
+
+router.get('/details/:id', async (ctx) => {
+  const {
+    id
+  } = ctx.params
+
+  const one = await findOneBook(id)
+
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '没有找到书籍',
+    }
+    return;
+  }
+
+  ctx.body = {
+    code: 1,
+    data: one,
+    msg: '成功',
+  }
+
 })
 
 module.exports = router
