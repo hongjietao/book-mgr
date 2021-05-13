@@ -17,20 +17,22 @@ export default defineComponent({
 
     const submit = async () => {
       const form = clone(addForm)
-      // form.publishDate = addForm.publishDate.valueOf()
-      console.log(form)
       const res = await user.add(form)
+
+      const close = () => {
+        context.emit("update:show", false)
+      }
 
       result(res)
         .success((d, { data }) => {
           Object.assign(addForm, defaultForm)
           message.success(data.msg)
+          close()
+          context.emit("getList")
         })
     }
 
-    const close = () => {
-      context.emit("update:show", false)
-    }
+
 
     return {
       addForm,

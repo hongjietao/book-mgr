@@ -14,9 +14,12 @@ export default defineComponent({
     const total = ref(0)
     const list = ref([])
     const showAddModal = ref(false)
+    const isSearch = ref(false)
+    const keyword = ref('')
 
+    // 获取用户信息
     const getUser = async () => {
-      const res = await user.list(curPage.value, 20)
+      const res = await user.list(curPage.value, 20, keyword.value)
       result(res)
         .success(({ data: { list: l, total: t} })=>{
           total.value = t
@@ -24,10 +27,17 @@ export default defineComponent({
         })
     }
 
+    // 换页
+    const setPage = (page) => {
+      curPage.value = page
+      getUser()
+    }
+
     onMounted(() => {
       getUser()
     })
 
+    // 删除用户
     const remove = async ({ _id }) => {
       // console.log(_id);
       const res = await user.remove(_id)
@@ -38,14 +48,43 @@ export default defineComponent({
         })
     }
 
+    // 重置密码
+    const reset = async ({ _id }) => {
+      const res = await user.resetPassword(_id)
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg)
+        })
+    }
+
+    // 查询用户
+    const onSearch = () => {
+      getUser()
+      isSearch.value = true
+    }
+
+    // 查询后返回
+    const backALl = () => {
+      keyword.value = ''
+      isSearch.value = false
+      getUser()
+    }
+
     return {
       curPage,
       total,
+      setPage,
       list,
       columns,
       formatTimestamp,
       remove,
       showAddModal,
+      getUser,
+      reset,
+      onSearch,
+      isSearch,
+      keyword,
+      backALl,
     }
   }
 })

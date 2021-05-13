@@ -1,6 +1,7 @@
 const Router = require('@koa/router')
 const mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid');
+const config = require('../../project.config')
 
 const User = mongoose.model('User')
 
@@ -67,7 +68,7 @@ router.delete('/:id', async (ctx) => {
 router.post('/add', async (ctx) => {
   const {
     account,
-    password = '123',
+    password = password || config.DEFAULT_PASSWORD,
   } = ctx.request.body
 
   const user = new User({
@@ -81,6 +82,39 @@ router.post('/add', async (ctx) => {
     code: 1,
     data: res,
     msg: '创建用户成功'
+  }
+
+})
+
+router.post('/reset/password', async (ctx) => {
+  const {
+    id
+  } = ctx.request.body
+
+  const user = await User.findOne({
+    _id: id
+  }).exec()
+
+  if(!user) {
+    ctx.body = {
+      code: 0,
+      msg: '未找到用户',
+      data: ''
+    }
+    return 
+  }
+
+  user.password = config.DEFAULT_PASSWORD
+
+  const res = await user.save()
+
+  ctx.body = {
+    code: 1,
+    data: {
+      account: user.account,
+      _id: user._id
+    },
+    msg: '重置密码成功'
   }
 
 })
