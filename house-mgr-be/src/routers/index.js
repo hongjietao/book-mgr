@@ -4,6 +4,7 @@ const book = require('./book')
 const house = require('./house')
 const log = require('./log')
 const user = require('./user')
+const character = require('./character')
 
 module.exports = (app) => {
   app.use(auth.routes());
@@ -12,4 +13,5 @@ module.exports = (app) => {
   app.use(house.routes());
   app.use(log.routes());
   app.use(user.routes());
+  app.use(character.routes());
 } 

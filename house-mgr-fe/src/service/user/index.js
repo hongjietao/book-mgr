@@ -34,3 +34,13 @@ export const resetPassword = (id) => {
     },
   )
 }
+
+export const editCharacter = (character, userId) => {
+  return axios.post(
+    `http://localhost:3000/user/update/character`,
+    {
+      character,
+      userId,
+    },
+  )
+}

@@ -1,21 +1,32 @@
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import { message } from 'ant-design-vue'
+import { EditOutlined } from '@ant-design/icons-vue'
 import { user } from '@/service'
 import { result, formatTimestamp } from '@/helpers/utils'
 import { columns } from './const'
 import AddOne from './AddOne/index.vue'
+import { getCharacterInfoById } from '@/helpers/character'
+import store from '@/store'
 
 export default defineComponent({
   components:{
     AddOne,
+    EditOutlined,
   },
   setup(){
     const curPage = ref(1)
     const total = ref(0)
     const list = ref([])
-    const showAddModal = ref(false)
+    const show = ref(false)
+    const showEditCharacterModal = ref(false)
     const isSearch = ref(false)
     const keyword = ref('')
+    const editForm = reactive({
+      character: '',
+      current: {},
+    })
+
+    const { characterInfo } = store.state
 
     // 获取用户信息
     const getUser = async () => {
@@ -39,7 +50,6 @@ export default defineComponent({
 
     // 删除用户
     const remove = async ({ _id }) => {
-      // console.log(_id);
       const res = await user.remove(_id)
       result(res)
         .success(({ msg }) => {
@@ -70,6 +80,28 @@ export default defineComponent({
       getUser()
     }
 
+    // 修改用户角色
+    const onEdit = (record) => {
+      editForm.current = record
+      editForm.character = record.character
+      showEditCharacterModal.value = true
+    }
+
+    const close = () => {
+      showEditCharacterModal.value = false
+    }
+
+    const submit = async () => {
+      const res = await user.editCharacter(editForm.character, editForm.current._id)
+
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg)
+          editForm.current.character = editForm.character
+          close()
+        })
+    }
+
     return {
       curPage,
       total,
@@ -78,13 +110,20 @@ export default defineComponent({
       columns,
       formatTimestamp,
       remove,
-      showAddModal,
+      show,
       getUser,
       reset,
       onSearch,
       isSearch,
       keyword,
       backALl,
+      getCharacterInfoById,
+      editForm,
+      characterInfo,
+      showEditCharacterModal,
+      onEdit,
+      close,
+      submit,
     }
   }
 })

@@ -10,6 +10,12 @@ export const columns = [
     },
   },
   {
+    title: '角色',
+    slots: {
+      customRender: 'character',
+    },
+  },
+  {
     title: '操作',
     slots: {
       customRender: 'actions',

@@ -2,10 +2,12 @@ import { defineComponent, reactive } from 'vue'
 import { user } from '@/service'
 import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
+import store from '@/store'
 
 const defaultForm = {
-  account: 'test',
-  password: '123'
+  account: 'u',
+  password: '123',
+  character: '',
 }
 
 export default defineComponent({
@@ -14,19 +16,22 @@ export default defineComponent({
   },
   setup(props, context){
     const addForm = reactive(clone(defaultForm))
+    const { characterInfo } = store.state
+
+    addForm.character = characterInfo[1]._id
+
+    const close = () => {
+      context.emit("update:show", false)
+    }
 
     const submit = async () => {
       const form = clone(addForm)
       const res = await user.add(form)
 
-      const close = () => {
-        context.emit("update:show", false)
-      }
-
       result(res)
-        .success((d, { data }) => {
+        .success(({ data, msg }) => {
           Object.assign(addForm, defaultForm)
-          message.success(data.msg)
+          message.success(msg)
           close()
           context.emit("getList")
         })
@@ -39,6 +44,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      characterInfo,
     }
   }
 

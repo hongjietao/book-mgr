@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const config = require('../../project.config')
 
 const User = mongoose.model('User')
+const Character = mongoose.model('Character')
 
 const router = new Router({
   prefix: '/user',
@@ -69,11 +70,33 @@ router.post('/add', async (ctx) => {
   const {
     account,
     password = password || config.DEFAULT_PASSWORD,
+    character,
   } = ctx.request.body
+
+  if(!character) {
+    ctx.body = {
+      code: 0,
+      msg: '添加失败',
+    }
+    return 
+  }
+  // 验证身份信息
+  const char = await Character.findOne({
+    _id: character
+  })
+
+  if(!char) {
+    ctx.body = {
+      code: 0,
+      msg: '添加失败',
+    }
+    return 
+  }
 
   const user = new User({
     account,
     password,
+    character,
   })
 
   const res = await user.save()
@@ -106,7 +129,7 @@ router.post('/reset/password', async (ctx) => {
 
   user.password = config.DEFAULT_PASSWORD
 
-  const res = await user.save()
+  await user.save()
 
   ctx.body = {
     code: 1,
@@ -117,6 +140,47 @@ router.post('/reset/password', async (ctx) => {
     msg: '重置密码成功'
   }
 
+})
+
+router.post('/update/character', async (ctx) => {
+  const {
+    character,
+    userId,
+  } = ctx.request.body
+
+  const char = await Character.find({
+    _id: character
+  })
+
+  if(!char) {
+    ctx.body = {
+      code: 0,
+      msg: '角色错误',
+    }
+    return 
+  }
+
+  const user = await User.findOne({
+    _id: userId,
+  })
+
+  if(!user) {
+    ctx.body = {
+      code: 0,
+      msg: '用户不存在',
+    }
+    return 
+  }
+
+  user.character = character
+
+  const res = await user.save()
+
+  ctx.body = {
+    code: 1,
+    msg: '修改角色成功',
+    data: res,
+  }
 })
 
 module.exports = router

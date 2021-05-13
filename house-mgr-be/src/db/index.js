@@ -3,6 +3,7 @@ require('./Schemas/InviteCode')
 require('./Schemas/Book')
 require('./Schemas/House')
 require('./Schemas/Log')
+require('./Schemas/Character')
 
 const mongoose = require('mongoose')
 

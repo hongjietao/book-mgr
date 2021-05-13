@@ -20,6 +20,10 @@ export default defineComponent({
   setup(props, context){
     const addForm = reactive(clone(defaultForm))
 
+    const close = () => {
+      context.emit("update:show", false)
+    }
+
     const submit = async () => {
       const form = clone(addForm)
       // form.publishDate = addForm.publishDate.valueOf()
@@ -30,12 +34,11 @@ export default defineComponent({
         .success((d, { data }) => {
           Object.assign(addForm, defaultForm)
           message.success(data.msg)
+          close()
         })
     }
 
-    const close = () => {
-      context.emit("update:show", false)
-    }
+
 
     return {
       addForm,
