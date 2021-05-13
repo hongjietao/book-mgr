@@ -21,7 +21,15 @@
         :data-source="houseList"
         rowKey="_id"
         :pagination="false"
-      ></a-table>
+      >
+        <template #actions="record">
+          <a type="link" @click="toDetail(record.record)">detail</a>
+          &nbsp;
+          <a type="link" @click="update(record.record)">edit</a>
+          &nbsp;
+          <a type="link" @click="remove(record.record)">delete</a>
+        </template>
+      </a-table>
       <space-between style="margin-top: 24px">
         <div/>
         <a-pagination

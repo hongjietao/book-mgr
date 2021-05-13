@@ -24,8 +24,18 @@ const routes = [
       {
         path: 'house-list',
         name: 'HouseList',
-        component: () => import(/* webpackChunkName: "HouseList" */  '@/views/HouseList/index.vue')
-      }
+        component: () => import(/* webpackChunkName: "HouseList" */  '@/views/House/index.vue')
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import(/* webpackChunkName: "User" */  '@/views/User/index.vue')
+      },
+      {
+        path: 'log',
+        name: 'Log',
+        component: () => import(/* webpackChunkName: "Log" */  '@/views/Log/index.vue')
+      },
     ],
   },
 ];

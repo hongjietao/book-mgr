@@ -27,20 +27,11 @@ export const houseColumns = [
     title: "朝向",
     dataIndex: "facing",
   },
-]
-
-export const houseList = [
   {
-    _id: 'asdasd',
-    city: '西京',
-    neighborhood: '春秋小区',
-    floor: '12层',
-    area: '120平',
-    facing: '西北',
-    floor_plan_room: '3室'
-  },
-  {
-    _id: 'asdasd1',
-    city: 'sad',
-  },
+    title: "actions",
+    dataIndex: "actions",
+    slots: {
+      customRender: "actions"
+    }
+  }
 ]
