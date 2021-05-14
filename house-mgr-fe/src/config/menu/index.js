@@ -1,21 +1,7 @@
 export default [
   {
     title: '房源管理',
-    path: '/books',
-  },
-  {
-    title: '房源管理',
-    path: '/house',
-    children: [
-      {
-        title: '房源列表',
-        path: '/house-list',
-      },
-      // {
-      //   title: '已上线房源',
-      //   path: '/add-house',
-      // },
-    ]
+    path: '/house-list',
   },
   {
     title: '用户管理 ',
@@ -24,5 +10,19 @@ export default [
   {
     title: '操作日志 ',
     path: '/log',
+  },
+  {
+    title: '其它',
+    path: '/others',
+    children: [
+      {
+        title: '列表',
+        path: '/books',
+      },
+      // {
+      //   title: '已上线房源',
+      //   path: '/add-house',
+      // },
+    ]
   },
 ]

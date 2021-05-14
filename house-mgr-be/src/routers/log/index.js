@@ -18,9 +18,7 @@ router.get('/list', async (ctx) => {
   size = Number(size);
 
   const list = await Log
-    .find({
-      show: true,
-    })
+    .find()
     .sort({
       _id: -1,
     })

@@ -10,7 +10,9 @@ const LogSchema = new mongoose.Schema({
   request: {
     method: String,
     url: String,
-    body: String,
+    responseBody: String,
+    status: Number,
+    
   },
 
   meta: getMeta()

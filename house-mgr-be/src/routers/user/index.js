@@ -2,6 +2,7 @@ const Router = require('@koa/router')
 const mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid');
 const config = require('../../project.config')
+const { verify, getToken } = require('../../helpers/token')
 
 const User = mongoose.model('User')
 const Character = mongoose.model('Character')
@@ -180,6 +181,14 @@ router.post('/update/character', async (ctx) => {
     code: 1,
     msg: '修改角色成功',
     data: res,
+  }
+})
+
+router.get('/info', async (ctx) => {
+  ctx.body = {
+    data: await verify(getToken(ctx)),
+    code: 1,
+    msg: '获取成功',
   }
 })
 

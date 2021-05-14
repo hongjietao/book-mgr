@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store'
-import { character } from '@/service'
 
 const routes = [
   {
@@ -48,11 +47,10 @@ const router = createRouter({
 });
 
 router.beforeEach( async (to, from, next) => {
-  if(!window.characterInfo) {
-    const res = await character.list()
-    window.characterInfo = res.data
+  if(!store.state.characterInfo.length) {
     store.dispatch('getCharacterInfo')
   }
+  store.dispatch('getUserInfo')
   next()
 })
 

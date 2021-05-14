@@ -1,8 +1,11 @@
 import { defineComponent, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue'
 import { auth } from '@/service'
 import { result } from '@/helpers/utils'
+import { setToken } from '@/helpers/token'
 import { message } from 'ant-design-vue'
+import store from '@/store'
 
 export default defineComponent({
   components: {
@@ -11,6 +14,8 @@ export default defineComponent({
     MailOutlined,
   },
   setup(){
+    const router = useRouter()
+
     // 注册的账户表单
     const regForm = reactive({
       account: '',
@@ -54,12 +59,16 @@ export default defineComponent({
         message.info('请输入密码')
         return
       }
-      const { data } = await auth.login(loginForm.account, loginForm.password)
-      if(data.code) {
-        message.success(data.msg)
-        return
-      }
-      message.error(data.msg)
+      const res = await auth.login(loginForm.account, loginForm.password)
+
+      result(res)
+        .success(({ msg, data: { user, token }})=>{
+          message.success(msg)
+          store.commit('setUserInfo', user)
+          store.commit('setUserCharacter', user.character)
+          setToken(token)
+          router.replace('/books')
+        })
     }
 
     return {
