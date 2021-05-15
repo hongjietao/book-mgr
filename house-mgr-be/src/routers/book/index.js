@@ -99,7 +99,6 @@ router.delete('/:id', async (ctx) => {
     data: delMsg,
     msg: '删除成功',
   }
-
 })
 
 router.post('/update/count', async (ctx) => {
@@ -178,6 +177,7 @@ router.post('/update', async (ctx) => {
     msg: '修改成功',
   }
 })
+
 
 router.get('/details/:id', async (ctx) => {
   const {

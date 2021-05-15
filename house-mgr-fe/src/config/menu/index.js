@@ -1,7 +1,7 @@
 export default [
   {
     title: '房源管理',
-    path: '/house/list',
+    path: '/house-list',
   },
   {
     title: '用户管理 ',
@@ -20,8 +20,12 @@ export default [
         path: '/books',
       },
       {
-        title: '重置密码列表',
-        path: '/reset/password',
+        title: '邀请码',
+        path: '/invite-code',
+      },
+      {
+        title: '重置密码',
+        path: '/reset-password',
       },
       // {
       //   title: '已上线房源',

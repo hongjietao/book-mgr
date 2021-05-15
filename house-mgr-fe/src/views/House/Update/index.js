@@ -1,53 +1,47 @@
 import { defineComponent, reactive, watch } from 'vue'
-import { book } from '@/service'
+import { house } from '@/service'
 import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 import moment from 'moment'
 
-const defaultForm = {
-  name: '',
-  price: 0,
-  author: '',
-  publishDate: 0,
-  classify: '',
-}
-
 export default defineComponent({
   props: {
     show: Boolean,
-    book: Object,
+    house: Object,
   },
   setup(props, context){
     const editForm = reactive({
-      name: '',
-      price: 0,
-      author: '',
-      publishDate: 0,
-      classify: '',
+      city: '',
+      neighborhood: '',
+      floor: 0,
+      floor_plan_room: '',
+      area: 0,
+      facing: '',
     })
 
-    watch(() => props.book, (cur) => {
+    watch(() => props.house, (cur) => {
       Object.assign(editForm, cur)
-      editForm.publishDate = moment(Number(editForm.publishDate))
     })
     const close = () => {
       context.emit("update:show", false)
     }
 
     const submit = async () => {
-      const res = await book.update({
-        id: props.book._id,
-        name: editForm.name,
-        price: editForm.price,
-        author: editForm.author,
-        classify: editForm.classify,
-        publishDate: editForm.publishDate.valueOf()
-      })
+      let requestData = {
+        id: props.house._id,
+        city: editForm.city,
+        neighborhood: editForm.neighborhood,
+        floor: editForm.floor,
+        floor_plan_room: editForm.floor_plan_room,
+        area: editForm.area,
+        facing: editForm.facing,
+      }
+      const res = await house.update(requestData)
 
       result(res)
         .success(({ data, msg }) => {
           context.emit("update", data)
-          message.success(msg )
+          message.success(msg)
           close()
         })
     }

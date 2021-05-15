@@ -156,6 +156,7 @@ export default defineComponent({
     const toDetail = async (record) => {
       router.push(`/books/${record._id}`)
     }
+
     onMounted(async () => {
       getList()
     })

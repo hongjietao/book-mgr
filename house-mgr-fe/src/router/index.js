@@ -25,9 +25,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "BookDetails" */ '../views/BookDetails/index.vue'),
       },
       {
-        path: 'house/list',
+        path: 'house-list',
         name: 'HouseList',
         component: () => import(/* webpackChunkName: "HouseList" */  '@/views/House/index.vue')
+      },
+      {
+        path: 'house/:id',
+        name: 'HouseDetails',
+        component: () => import(/* webpackChunkName: "HouseDetails" */ '../views/HouseDetails/index.vue'),
       },
       {
         path: 'user',
@@ -40,9 +45,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "Log" */  '@/views/Log/index.vue')
       },
       {
-        path: 'reset/password',
+        path: 'reset-password',
         name: 'ResetPassword',
         component: () => import(/* webpackChunkName: "ResetPassword" */  '@/views/ResetPassword/index.vue')
+      },
+      {
+        path: 'invite-code',
+        name: 'InviteCode',
+        component: () => import(/* webpackChunkName: "InviteCode" */  '@/views/InviteCode/index.vue')
       },
     ],
   },

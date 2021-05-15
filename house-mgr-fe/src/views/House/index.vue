@@ -22,22 +22,31 @@
         rowKey="_id"
         :pagination="false"
       >
-        <template #actions="record">
-          <a type="link" @click="toDetail(record.record)">detail</a>
+        <template #actions="{record}">
+          <a type="link" @click="toDetail(record)">detail</a>
           &nbsp;
-          <a type="link" @click="update(record.record)">edit</a>
+          <a type="link" @click="update(record)">edit</a>
           &nbsp;
-          <a type="link" @click="remove(record.record)">delete</a>
+          <a type="link" @click="remove(record)">delete</a>
         </template>
       </a-table>
       <space-between style="margin-top: 24px">
         <div/>
         <a-pagination
+          v-model:current="curPage"
+          :total="total"
+          :page-size="10"
+          @change="setPage"
         ></a-pagination>
       </space-between>
     </a-card>
     <add-one
       v-model:show="show"
+    />
+    <update
+      v-model:show="showUpdateModel"
+      :house="curEditHouse"
+      @update="updateCurHouse"
     />
   </div>
 </template>

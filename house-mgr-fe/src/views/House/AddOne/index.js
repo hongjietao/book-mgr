@@ -4,7 +4,6 @@ import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 
 const defaultForm = {
-  // _id: 'asdasd',
   city: '西京',
   neighborhood: '春秋小区',
   floor: 12,

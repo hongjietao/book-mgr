@@ -1,4 +1,4 @@
-# book-mgr-fe
+# house-mgr-fe
 
 ## Project setup
 ```
