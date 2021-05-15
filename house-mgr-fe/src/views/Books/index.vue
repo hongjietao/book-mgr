@@ -17,9 +17,10 @@
       </space-between>
       <a-divider/>
       <a-table
-      :columns='columns'
-      :data-source="list"
-      :pagination="false"
+        :columns='columns'
+        :data-source="list"
+        :pagination="false"
+        rowKey="_id"
       >
         <template #publishDate="record">
           {{formatTimestamp(record.record.publishDate)}}

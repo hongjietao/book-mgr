@@ -6,8 +6,8 @@
         <div class="title">房源租售管理系统</div>
       </div>
       <div class="right">
-        <div class="hello-msg">你好, hongjie</div>
-        <div class="logout">退出</div>
+        <div class="hello-msg">你好, {{ store.userInfo.account }}</div>
+        <div class="logout" @click="logout">退出</div>
       </div>
     </div>
     <div class="app-header-placeholder"></div>

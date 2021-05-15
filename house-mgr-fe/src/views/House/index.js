@@ -19,7 +19,6 @@ export default defineComponent({
         .success(({ data }) => {
           houseList.value = data
         })
-      // console.log(res);
     })
 
     const backAll = () => {

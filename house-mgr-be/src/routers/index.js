@@ -5,6 +5,7 @@ const house = require('./house')
 const log = require('./log')
 const user = require('./user')
 const character = require('./character')
+const forgetPassword = require('./forget-password')
 
 module.exports = (app) => {
   app.use(auth.routes());
@@ -14,4 +15,5 @@ module.exports = (app) => {
   app.use(log.routes());
   app.use(user.routes());
   app.use(character.routes());
+  app.use(forgetPassword.routes());
 } 

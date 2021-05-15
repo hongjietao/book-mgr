@@ -81,10 +81,21 @@ router.post('/add', async (ctx) => {
     }
     return 
   }
+  // 查询当前账户名是否重复
+  const someUser = await User.findOne({
+    account,
+  })
+  if(someUser) {
+    ctx.body = {
+      code: 0,
+      msg: '账户重复',
+    }
+    return 
+  }
   // 验证身份信息
   const char = await Character.findOne({
     _id: character
-  })
+  }).exec()
 
   if(!char) {
     ctx.body = {

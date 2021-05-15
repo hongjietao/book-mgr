@@ -1,10 +1,10 @@
 const getMeta = () => {
   return {
-    createAt: {
+    createdAt: {
       type: Number,
       default: (new Date()).getTime(),
     },
-    updateAt: {
+    updatedAt: {
       type: Number,
       default: (new Date()).getTime(),
     },

@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import store from '@/store'
+import { user } from '@/service';
+import store from '@/store';
+import { message } from 'ant-design-vue';
 
 const routes = [
   {
@@ -23,7 +25,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "BookDetails" */ '../views/BookDetails/index.vue'),
       },
       {
-        path: 'house-list',
+        path: 'house/list',
         name: 'HouseList',
         component: () => import(/* webpackChunkName: "HouseList" */  '@/views/House/index.vue')
       },
@@ -37,6 +39,11 @@ const routes = [
         name: 'Log',
         component: () => import(/* webpackChunkName: "Log" */  '@/views/Log/index.vue')
       },
+      {
+        path: 'reset/password',
+        name: 'ResetPassword',
+        component: () => import(/* webpackChunkName: "ResetPassword" */  '@/views/ResetPassword/index.vue')
+      },
     ],
   },
 ];
@@ -48,9 +55,11 @@ const router = createRouter({
 
 router.beforeEach( async (to, from, next) => {
   if(!store.state.characterInfo.length) {
-    store.dispatch('getCharacterInfo')
+    await store.dispatch('getCharacterInfo')
   }
-  store.dispatch('getUserInfo')
+  if(!store.state.userInfo.length) {
+    await store.dispatch('getUserInfo')
+  }
   next()
 })
 

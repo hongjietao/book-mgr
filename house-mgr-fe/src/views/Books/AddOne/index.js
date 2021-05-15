@@ -21,7 +21,6 @@ export default defineComponent({
     const submit = async () => {
       const form = clone(addForm)
       form.publishDate = addForm.publishDate.valueOf()
-      console.log(form)
       const res = await book.add(form)
 
       result(res)

@@ -40,7 +40,6 @@ export default createStore({
         .success(({ data }) => {
           store.commit('setUserInfo', data)
           store.commit('setUserCharacter', getCharacterInfoById(data.character))
-          console.log(store.state);
         })
     },
 

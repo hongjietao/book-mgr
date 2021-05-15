@@ -1,4 +1,4 @@
 module.exports = {
-  DEFAULT_PASSWORD: '123456',
+  DEFAULT_PASSWORD: '123123',
   JWT_SECRET: 'house-mgr',
 }
