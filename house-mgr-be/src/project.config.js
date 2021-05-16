@@ -4,4 +4,6 @@ module.exports = {
   DEFAULT_PASSWORD: '123123',
   JWT_SECRET: 'house-mgr',
   UPLOAD_DIR: path.resolve(__dirname, '../upload'),
+
+  SERVER_PORT: 80,
 }

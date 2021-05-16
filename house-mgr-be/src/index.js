@@ -7,6 +7,7 @@ const cors = require('@koa/cors')
 const { middleware: koaJwtMiddleware, catchTokenError, checkUser } = require('./helpers/token')
 const { logMiddleware } = require('./helpers/log')
 const path = require('path')
+const config = require('./project.config')
 
 const app = new Koa()
 
@@ -31,7 +32,7 @@ connect().then( () => {
 
     registerRoutes(app)
 
-    app.listen(3000, () => {
+    app.listen(config.SERVER_PORT, () => {
       console.log('success!');
     })
   }
