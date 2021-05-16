@@ -10,9 +10,9 @@ const router = new Router({
 
 router.get('/list', async (ctx) => {
   let {
-    page,
-    size,
-  } = ctx.query;
+    page = 1,
+    size = 20
+  } = ctx.query
 
   page = Number(page);
   size = Number(size);

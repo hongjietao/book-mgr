@@ -12,6 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
+    redirect: '/auth',
     component: () => import(/* webpackChunkName: "BasicLayout" */ '../layout/BasicLayout/index.vue'),
     children: [
       {
@@ -54,6 +55,16 @@ const routes = [
         name: 'InviteCode',
         component: () => import(/* webpackChunkName: "InviteCode" */  '@/views/InviteCode/index.vue')
       },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import(/* webpackChunkName: "Profile" */  '@/views/Profile/index.vue')
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "Dashboard" */  '@/views/Dashboard/index.vue')
+      },
     ],
   },
 ];
@@ -64,12 +75,42 @@ const router = createRouter({
 });
 
 router.beforeEach( async (to, from, next) => {
+  let res = {};
+
+  // 获取用户认证信息，没有认证就跳转到登录页面
+  try {
+    res = await user.info();
+  } catch (e) {
+    if (e.message.includes('code 401')) {
+      res.code = 401;
+    }
+  }
+
+  const { code } = res;
+
+  if (code === 401) {
+    if (to.path === '/auth') {
+      next();
+      return;
+    }
+
+    message.error('认证失败，请重新登入');
+    next('/auth');
+
+    return;
+  }
   if(!store.state.characterInfo.length) {
     await store.dispatch('getCharacterInfo')
   }
   if(!store.state.userInfo.length) {
     await store.dispatch('getUserInfo')
   }
+
+  if (to.path === '/auth') {
+    next('/dashboard');
+    return;
+  }
+
   next()
 })
 

@@ -12,7 +12,10 @@ export default defineComponent({
     AddOne,
     Update,
   },
-  setup(){
+  props: {
+    simple: Boolean
+  },
+  setup(props){
     const show = ref(false)
     const isSearch = ref(false)
     const keyword = ref('')
@@ -23,8 +26,25 @@ export default defineComponent({
     const curEditHouse = ref({})
     const router = useRouter()
 
+    if(!props.simple) {
+      houseColumns.unshift({
+        title: "编号",
+        // 自动省略
+        // ellipsis: true,
+        dataIndex: "_id",
+      })
+      houseColumns.push({
+        title: "actions",
+        // 定宽
+        // width: 90,
+        dataIndex: "actions",
+        slots: {
+          customRender: "actions"
+        }
+      })
+    }
     const getList = async () => {
-      const res = await house.list(curPage.value, 10)
+      const res = await house.list(curPage.value, 20)
       result(res)
         .success(({ data: { list, total: t} }) => {
           houseList.value = list
@@ -94,6 +114,7 @@ export default defineComponent({
       showUpdateModel,
       curEditHouse,
       updateCurHouse,
+      simple: props.simple
     }
   }
 })

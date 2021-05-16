@@ -49,7 +49,7 @@ router.get('/list', async (ctx) => {
 
   let {
     page = 1,
-    size = 10
+    size = 20
   } = ctx.query
   
   size = Number(size)

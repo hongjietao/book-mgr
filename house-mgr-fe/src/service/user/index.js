@@ -1,34 +1,32 @@
-import axios from 'axios'
+import { get, del, post } from '@/helpers/request'
 
 export const list = (page=1, size=20, keyword='') => {
-  return axios.get(
-    'http://localhost:3000/user/list',
+  return get(
+    '/user/list',
     {
-      params: {
-        page,
-        size,
-        keyword,
-      }
+      page,
+      size,
+      keyword,
     }
   )
 }
 
 export const remove = (id) => {
-  return axios.delete(
-    `http://localhost:3000/user/${id}`
+  return del(
+    `/user/${id}`
   )
 }
 
 export const add = (form) => {
-  return axios.post(
-    `http://localhost:3000/user/add`,
+  return post(
+    `/user/add`,
     form,
   )
 }
 
 export const resetPassword = (id) => {
-  return axios.post(
-    `http://localhost:3000/user/reset/password`,
+  return post(
+    `/user/reset/password`,
     {
       id
     },
@@ -36,8 +34,8 @@ export const resetPassword = (id) => {
 }
 
 export const editCharacter = (character, userId) => {
-  return axios.post(
-    `http://localhost:3000/user/update/character`,
+  return post(
+    `/user/update/character`,
     {
       character,
       userId,
@@ -46,5 +44,11 @@ export const editCharacter = (character, userId) => {
 }
 
 export const info = () => {
-  return axios.get(`http://localhost:3000/user/info`)
+  return get(`/user/info`)
+}
+
+export const addMany = (key) => {
+  return post(`/user/addMany`,{
+    key
+  })
 }

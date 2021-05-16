@@ -2,10 +2,11 @@ import { defineComponent, onMounted, reactive, ref } from 'vue'
 import { message } from 'ant-design-vue'
 import { EditOutlined } from '@ant-design/icons-vue'
 import { user } from '@/service'
-import { result, formatTimestamp } from '@/helpers/utils'
 import { columns } from './const'
 import AddOne from './AddOne/index.vue'
+import { result, formatTimestamp } from '@/helpers/utils'
 import { getCharacterInfoById } from '@/helpers/character'
+import { getHeaders } from '@/helpers/request';
 import store from '@/store'
 
 export default defineComponent({
@@ -102,6 +103,20 @@ export default defineComponent({
         })
     }
 
+    // 批量上传
+    const onUploadChange = ({ file }) => {
+      if(file.response) {
+        result(file.response)
+          .success(async (key) => {
+            const res = await user.addMany(key)
+            result(res)
+              .success(({data: { addCount} }) => {
+                message.success(`成功添加${addCount}位用户`)
+              })
+          })
+      }
+    }
+
     return {
       curPage,
       total,
@@ -124,6 +139,8 @@ export default defineComponent({
       onEdit,
       close,
       submit,
+      onUploadChange,
+      headers: getHeaders(),
     }
   }
 })

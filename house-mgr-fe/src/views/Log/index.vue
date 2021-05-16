@@ -1,10 +1,12 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-      <a-card>
-        <h2>操作日志</h2>
+      <a-card :title="simple ? '最近操作记录' : ''">
+        <div v-if="!simple">
+          <h2>操作日志</h2>
 
-        <a-divider />
+          <a-divider />
+        </div>
 
         <div>
           <a-table
@@ -13,6 +15,7 @@
             :columns="columns"
             :pagination="false"
             rowKey="_id"
+            :scroll="{x: 'max-content'}"
           >
             <template #createdAt="{ record }">
               {{formatTimestamp(record.meta.createdAt)}}
@@ -24,7 +27,7 @@
 
           </a-table>
         </div>
-        <flex-end style="margin-top: 24px;">
+        <flex-end  v-if="!simple" style="margin-top: 24px;">
           <a-pagination
             v-model:value="curPage"
             :total="total"

@@ -3,7 +3,7 @@ import { message } from 'ant-design-vue'
 export const result = (response, authShowMessage = true) => {
   const { data } = response
 
-  if((data.code !== 1) && authShowMessage) {
+  if((data.code === 0) && authShowMessage) {
     message.error(data.msg)
   }
 

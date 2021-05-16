@@ -1,31 +1,47 @@
 export default [
   {
+    title: '总览',
+    path: '/dashboard',
+    onlyAdmin: false,
+  },
+  {
     title: '房源管理',
     path: '/house-list',
+    onlyAdmin: false,
   },
   {
     title: '用户管理 ',
     path: '/user',
+    onlyAdmin: true,
   },
   {
     title: '操作日志 ',
     path: '/log',
+    onlyAdmin: true,
   },
   {
     title: '其它',
-    path: '/others',
+    onlyAdmin: false,
     children: [
-      {
-        title: '列表',
-        path: '/books',
-      },
+      // {
+      //   title: '列表',
+      //   path: '/books',
+      //   onlyAdmin: false,
+      // },
       {
         title: '邀请码',
         path: '/invite-code',
+        onlyAdmin: true,
       },
       {
         title: '重置密码',
         path: '/reset-password',
+        onlyAdmin: false,
+      },
+      {
+        title: '个人信息',
+        path: '/profile',
+        onlyAdmin: false,
       },
       // {
       //   title: '已上线房源',

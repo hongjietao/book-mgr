@@ -28,7 +28,7 @@
 
       .title {
         color: rgba(0,0,0, .87);
-        font-size: 18px ;
+        font-size: 18px;
       }
     }
 
@@ -36,18 +36,23 @@
       display: flex;
       align-items: center;
 
+      .hello-msg {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
       .logout {
         width: 80px;
         text-align: center;
         height: 64px;
         line-height: 64px;
-        cursor: pointer;
+        // cursor: pointer;
         margin-right: 16px;
 
         // .logout:hover
-        &:hover {
-          background-color: #eee;
-        }
+        // &:hover {
+        //   background-color: #eee;
+        // }
       }
     }
   }

@@ -3,7 +3,7 @@
     <div class="bg"></div>
     <div class="title-info">
       <img src="@/assets/img/house-icon.png" alt="房源图片">
-      <h2 class="title">房源租售管理系统后台 </h2>
+      <h2 class="title">房源租售管理系统</h2>
     </div>
 
     <div class="form">
@@ -12,7 +12,7 @@
           <div class="item">
             <a-input
               size="large"
-              placeholder="账号"
+              placeholder="账号: admin"
               v-model:value="loginForm.account"
             >
               <template #prefix>
@@ -23,7 +23,8 @@
           <div class="item">
             <a-input
               size="large"
-              placeholder="密码"
+              placeholder="密码: admin"
+              @keypress.enter="login"
               v-model:value="loginForm.password"
             >
               <template #prefix>

@@ -1,8 +1,10 @@
 export const houseColumns = [
-  {
-    title: "编号",
-    dataIndex: "_id",
-  },
+  // {
+  //   title: "编号",
+  //   // 自动省略
+  //   // ellipsis: true,
+  //   dataIndex: "_id",
+  // },
   {
     title: "城市",
     dataIndex: "city",
@@ -27,11 +29,13 @@ export const houseColumns = [
     title: "朝向",
     dataIndex: "facing",
   },
-  {
-    title: "actions",
-    dataIndex: "actions",
-    slots: {
-      customRender: "actions"
-    }
-  }
+  // {
+  //   title: "actions",
+  //   // 定宽
+  //   // width: 90,
+  //   dataIndex: "actions",
+  //   slots: {
+  //     customRender: "actions"
+  //   }
+  // },
 ]

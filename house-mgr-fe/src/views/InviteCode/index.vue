@@ -15,6 +15,7 @@
           bordered
           :columns="columns"
           :data-source="list"
+          rowKey="_id"
         >
           <template #status="{ record }">
             {{ record.user ? '已使用' : '未使用' }}

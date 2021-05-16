@@ -1,43 +1,41 @@
-import axios from 'axios'
+import { get, del, post } from '@/helpers/request'
 
 export const add = (form) => {
-  return axios.post(
-    'http://localhost:3000/house/add',
+  return post(
+    '/house/add',
     form
     )
  }
 
 export const list = (page = 1, size = 20) => {
-  return axios.get(
-    'http://localhost:3000/house/list',
+  return get(
+    '/house/list',
     {
-      params: {
-        page,
-        size
-      }
+      page,
+      size
     },
   )
 }
 
 export const detail = (id) => {
-  return axios.get(
-    `http://localhost:3000/house/detail/${id}`
+  return get(
+    `/house/detail/${id}`
   )
 }
 
 export const remove = (id) => {
-  return axios.delete(`http://localhost:3000/house/${id}`)
+  return del(`/house/${id}`)
 }
 
 
 export const update = (data) => {
-  return axios.post(`http://localhost:3000/house/update`,
+  return post(`/house/update`,
     data
   )
 }
 
 // export const login = (account, password) => {
-//  return axios.post('http://localhost:3000/auth/login',{
+//  return post('/auth/login',{
 //    account,
 //    password,
 //  })

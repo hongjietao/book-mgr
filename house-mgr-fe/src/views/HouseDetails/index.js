@@ -14,7 +14,9 @@ export default defineComponent({
     const router = useRouter()
     const id = route.params.id
     const showUpdateModal = ref(false);
-    const detailInfo = ref({})
+    const detailInfo = ref({
+      meta:{}
+    })
 
     const getDetail = async () => {
       const res = await house.detail(id)
@@ -47,6 +49,7 @@ export default defineComponent({
       remove,
       showUpdateModal,
       update,
+      formatTimestamp,
     }
   }
 })

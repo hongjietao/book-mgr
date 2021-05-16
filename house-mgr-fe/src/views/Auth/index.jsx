@@ -5,6 +5,7 @@ import { auth, resetPassword } from '@/service'
 import { result } from '@/helpers/utils'
 import { setToken } from '@/helpers/token'
 import { message, Modal, Input } from 'ant-design-vue'
+import { getCharacterInfoById } from '@/helpers/character'
 import store from '@/store'
 
 export default defineComponent({
@@ -62,12 +63,15 @@ export default defineComponent({
       const res = await auth.login(loginForm.account, loginForm.password)
 
       result(res)
-        .success(({ msg, data: { user, token }})=>{
+        .success( async ({ msg, data: { user, token }})=>{
           message.success(msg)
-          store.commit('setUserInfo', user)
-          store.commit('setUserCharacter', user.character)
+
           setToken(token)
-          router.replace('/books')
+          await store.dispatch('getCharacterInfo')
+          
+          store.commit('setUserInfo', user)
+          store.commit('setUserCharacter', getCharacterInfoById(user.character))
+          router.replace('/dashboard')
         })
     }
 

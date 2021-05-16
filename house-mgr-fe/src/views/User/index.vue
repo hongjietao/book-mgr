@@ -15,7 +15,17 @@
           />
           <a v-if="isSearch" @click="backALl">返回</a>
         </div>
-        <a-button @click="show = true">添加用户</a-button>
+        <div>
+          <a-button @click="show = true">添加用户</a-button>
+          &nbsp;
+          <a-upload
+            @change="onUploadChange"
+            action="http://localhost:3000/upload/file"
+            :headers="headers"
+          >
+            <a-button type="primary">上传 Excel 添加</a-button>
+          </a-upload>
+        </div>
       </space-between>
 
       <a-divider />
@@ -29,7 +39,7 @@
           rowKey="_id"
         >
           <template #createAt="{record}">
-            {{formatTimestamp(record.meta.createAt)}}
+            {{formatTimestamp(record.meta.createdAt)}}
           </template>
 
           <template #character="{record}">

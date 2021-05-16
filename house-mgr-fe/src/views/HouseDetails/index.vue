@@ -18,12 +18,12 @@
           </div>
         </div>
         <!-- Todo -->
-        <!-- <div class="items">
+        <div class="items">
           <div class="item">
-            <div class="title">创建日期</div>
-            <div class="content">{{d?.meta.createdAt}}</div>
+            <div class="title">创建时间</div>
+            <div class="content">{{formatTimestamp(d.meta.createdAt)}}</div>
           </div>
-        </div> -->
+        </div>
         <div class="items">
           <div class="item">
             <div class="title">城市</div>
