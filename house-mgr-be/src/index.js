@@ -1,12 +1,16 @@
 const Koa = require('koa')
 const koaBody = require('koa-body')
+const koaStatic = require('koa-static')
 const { connect } = require('./db')
 const registerRoutes = require('./routers')
 const cors = require('@koa/cors')
 const { middleware: koaJwtMiddleware, catchTokenError, checkUser } = require('./helpers/token')
 const { logMiddleware } = require('./helpers/log')
+const path = require('path')
 
 const app = new Koa()
+
+app.use(koaStatic(path.resolve(__dirname, '../public')))
 
 connect().then( () => {
     app.use(cors())
