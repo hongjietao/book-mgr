@@ -5,6 +5,7 @@ const config  = require('../../project.config');
 
 const User = mongoose.model('User');
 const House = mongoose.model('House');
+const Customer = mongoose.model('Customer');
 const Log = mongoose.model('Log');
 
 const router = new Router({
@@ -15,6 +16,7 @@ router.get('/base-info', async (ctx) => {
   const houseTotal = await House.countDocuments();
   const userTotal = await User.countDocuments();
   const logTotal = await Log.find({ show: true }).countDocuments();
+  const customerTotal = await Customer.find().countDocuments();
 
   ctx.body = {
     code: 1,
@@ -22,6 +24,7 @@ router.get('/base-info', async (ctx) => {
     data: {
       total: {
         house: houseTotal,
+        customer: customerTotal,
         user: userTotal,
         log: logTotal,
       },

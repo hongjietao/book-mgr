@@ -1,21 +1,21 @@
 <template>
   <div>
     <a-card
-      :title="simple ? '最近添加的房源' : '' "
+      :title="simple ? '最近添加的客户' : '' "
     >
       <div v-if="!simple">
-        <h2>房源列表</h2>
+        <h2>客户列表</h2>
         <space-between>
           <div class="search">
             <a-input-search
-              placeholder="根据小区搜索"
+              placeholder="根据客户名字搜索"
               enter-button
               v-model:value="keyword"
               @search="onSearch"
             />
             <a v-if="isSearch" @click="backALl">返回</a>
           </div>
-          <a-button @click="show = true">添加房源</a-button>
+          <a-button @click="show = true">添加客户</a-button>
         </space-between>
         <a-divider/>
       </div>
@@ -27,21 +27,15 @@
         :pagination="false"
         :scroll="{x: 'max-content'}"
       >
+        <template #type="{record}">
+          {{+record.type ?'买房用户' : '租房用户'}}
+        </template>
         <template #actions="{record}">
           <a type="link" @click="toDetail(record)">detail</a>
           &nbsp;
           <a type="link" @click="update(record)">edit</a>
           &nbsp;
           <a type="link" @click="remove(record)">delete</a>
-        </template>
-        <template #type="{record}">
-          {{+record.type ?'出售' : '出租'}}
-        </template>
-        <template #price="{record}">
-          {{record.price+(+record.type ?'万' : '元/月')}}
-        </template>
-        <template #verify="{record}">
-          {{verifyResult(record.verify)}}
         </template>
       </a-table>
       <flex-end style="margin-top: 24px" v-if="!simple">

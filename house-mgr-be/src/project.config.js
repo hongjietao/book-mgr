@@ -5,5 +5,5 @@ module.exports = {
   JWT_SECRET: 'house-mgr',
   UPLOAD_DIR: path.resolve(__dirname, '../upload'),
 
-  SERVER_PORT: 80,
+  SERVER_PORT: 3000,
 }

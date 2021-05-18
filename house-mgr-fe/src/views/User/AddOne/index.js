@@ -7,6 +7,9 @@ import store from '@/store'
 const defaultForm = {
   account: 'u',
   password: '123',
+  ID_card: '412822199805122632',
+  phone: '18790315365',
+  city: '东京',
   character: '',
 }
 

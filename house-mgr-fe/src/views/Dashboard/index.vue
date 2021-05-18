@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="dashboard-content">
     <a-spin :spinning="loading">
       <a-card>
         <div class="list">
+          <div class="item">
+            <div class="count">共 {{baseInfo.total.customer}} 位</div>
+            <div class="title">客户</div>
+          </div>
           <div class="item">
             <div class="count">共 {{baseInfo.total.house}} 套</div>
             <div class="title">房源</div>
@@ -26,7 +30,7 @@
       </div>
 
       <div class="right">
-        <log
+        <customer
           simple
         />
       </div>

@@ -9,6 +9,7 @@ const forgetPassword = require('./forget-password')
 const profile = require('./profile')
 const dashboard = require('./dashboard')
 const upload = require('./upload')
+const customer = require('./customer')
 
 module.exports = (app) => {
   app.use(auth.routes());
@@ -22,4 +23,5 @@ module.exports = (app) => {
   app.use(profile.routes());
   app.use(dashboard.routes());
   app.use(upload.routes());
+  app.use(customer.routes());
 } 

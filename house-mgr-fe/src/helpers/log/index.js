@@ -3,9 +3,13 @@ const LOG_MAP = [
   ['/log/list', '获取日志列表'],
   ['/user/info', '获取自己的登录信息'],
   ['/house/list', '获取房源列表'],
-  ['/user/list', '获取用户列表'],
+  ['/customer/list', '获取客源列表'],
+  ['/user/list', '获取员工列表'],
   ['/user/add', '新增用户'],
   ['/user/reset/password', '重置用户密码'],
+  ['/dashboard/base-info', '总揽'],
+  ['/invite/list', '获取邀请码列表'],
+  ['/invite/add', '新增邀请码'],
 ];
 
 export const getLogInfoByPath = (path) => {

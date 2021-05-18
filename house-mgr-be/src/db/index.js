@@ -6,6 +6,8 @@ require('./Schemas/Log')
 require('./Schemas/Character')
 require('./Schemas/LogResopnse')
 require('./Schemas/ForgetPassword')
+require('./Schemas/Customer')
+// require('./Schemas/SaleHouse')
 
 const mongoose = require('mongoose')
 

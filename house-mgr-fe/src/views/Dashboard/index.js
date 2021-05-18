@@ -3,12 +3,12 @@ import { dashboard } from '@/service'
 import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 import House from '@/views/House/index.vue'
-import Log from '@/views/Log/index.vue'
+import Customer from '@/views/Customer/index.vue'
 
 export default defineComponent({
   components: {
     House,
-    Log,
+    Customer,
   },
   setup(){
     const loading = ref(false)

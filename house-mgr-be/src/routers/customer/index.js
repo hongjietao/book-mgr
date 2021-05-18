@@ -3,52 +3,45 @@ const mongoose = require('mongoose')
 const { getBody } = require('../../helpers/utils/index')
 // const { v4: uuidv4 } = require('uuid');
 
-const House = mongoose.model('House')
+const Customer = mongoose.model('Customer')
 
-const findOneHouse = async (id) => {
-  const one = await House.findOne({
+const findOneCustomer = async (id) => {
+  const one = await Customer.findOne({
     _id: id,
   }).exec()
   return one
 }
 
 const router = new Router({
-  prefix: '/house',
+  prefix: '/customer',
 })
 
 router.post('/add', async (ctx) => {
   const { 
-    city,
-    neighborhood,
-    floor,
-    floor_plan_room,
-    area,
-    facing,
+    name,
+    phone,
+    ID_card,
     type,
-    price,
-    verify,
+    area,
     creater,
   } = getBody(ctx)
 
-  const house = new House({
-    city,
-    neighborhood,
-    floor,
-    floor_plan_room,
-    area,
-    facing,
+  const customer = new Customer({
+    name,
+    phone,
+    ID_card,
     type,
-    price,
-    verify,
+    area,
     creater,
   })
-  const res = await house.save()
+  const res = await customer.save()
   ctx.body = {
     code: 1,
     data: res,
     msg: '创建成功'
   }
 })
+
 
 router.get('/list', async (ctx) => {
   const {
@@ -68,14 +61,14 @@ router.get('/list', async (ctx) => {
     query.name = keyword
   }
 
-  const list = await House
+  const list = await Customer
     .find(query)
     .sort({ _id: -1 })
     .skip((page - 1) * size)
     .limit(size)
     .exec()
 
-  const total = await House.countDocuments()
+  const total = await Customer.countDocuments()
 
   ctx.body = {
     code: 1,
@@ -95,7 +88,7 @@ router.delete('/:id', async (ctx) => {
     id,
   } = ctx.params;
 
-  const delMsg = await House.deleteOne({
+  const delMsg = await Customer.deleteOne({
     _id: id,
   })
   
@@ -106,14 +99,14 @@ router.delete('/:id', async (ctx) => {
   }
 })
 
-// 更新房源信息
+// 更新客源信息
 router.post('/update', async (ctx) => {
   const {
     id,
     ...others
   } = ctx.request.body
 
-  const one = await findOneHouse(id)
+  const one = await findOneCustomer(id)
 
   if(!one) {
     ctx.body = {
@@ -141,19 +134,17 @@ router.post('/update', async (ctx) => {
   }
 })
 
-
-
 router.get('/detail/:id', async (ctx) => {
   const {
     id
   } = ctx.params
 
-  const one = await findOneHouse(id)
+  const one = await findOneCustomer(id)
 
   if(!one) {
     ctx.body = {
       code: 0,
-      msg: '没有找到房源',
+      msg: '没有找到客户',
     }
     return;
   }

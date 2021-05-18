@@ -52,3 +52,8 @@ export const addMany = (key) => {
     key
   })
 }
+export const quit = (id) => {
+  return post(`/user/quit`,{
+    id
+  })
+}

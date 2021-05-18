@@ -4,7 +4,7 @@ import { result, clone } from '@/helpers/utils'
 import { houseColumns } from './const.js'
 import AddOne from './AddOne/index.vue'
 import Update from './Update/index.vue'
-import { house } from '@/service'
+import { customer } from '@/service'
 import { message, Modal, Input } from 'ant-design-vue'
 
 export default defineComponent({
@@ -34,7 +34,7 @@ export default defineComponent({
       if(_idx === -1) {
         houseColumns.unshift(
           {
-            title: "编号",
+            title: "客户编号",
             // 自动省略
             // ellipsis: true,
             dataIndex: "_id",
@@ -52,7 +52,7 @@ export default defineComponent({
       })
     }
     const getList = async () => {
-      const res = await house.list(curPage.value, 20)
+      const res = await customer.list(curPage.value, 20)
       result(res)
         .success(({ data: { list, total: t} }) => {
           houseList.value = list
@@ -85,12 +85,12 @@ export default defineComponent({
 
     // 进入详情页面
     const toDetail = async (record) => {
-      router.push(`/house/${record._id}`)
+      router.push(`/customer/${record._id}`)
     }
 
     // 删除一行数据
     const remove = async ({ _id }) => {
-      const res = await house.remove(_id)
+      const res = await customer.remove(_id)
       result(res)
         .success(({ msg }) => {
           message.success(msg)

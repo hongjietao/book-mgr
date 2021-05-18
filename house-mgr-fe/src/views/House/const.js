@@ -29,6 +29,28 @@ export const houseColumns = [
     title: "朝向",
     dataIndex: "facing",
   },
+  {
+    title: "类型",
+    slots: {
+      customRender: "type"
+    }
+  },
+  {
+    title: "价格",
+    slots: {
+      customRender: "price"
+    }
+  },
+  {
+    title: "状态",
+    slots: {
+      customRender: "verify"
+    }
+  },
+  {
+    title: "录入人员",
+    dataIndex: "creater",
+  },
   // {
   //   title: "actions",
   //   // 定宽

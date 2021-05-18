@@ -68,10 +68,17 @@ router.delete('/:id', async (ctx) => {
 
 })
 
+// city: String, //所在城市
+// phone: String, //手机号
+// ID_card: String, //身份证
+// type: Number, //状态 0:离职， 1: 在职
 router.post('/add', async (ctx) => {
   const {
     account,
     password = password || config.DEFAULT_PASSWORD,
+    city,
+    phone,
+    ID_card,
     character,
   } = ctx.request.body
 
@@ -110,6 +117,10 @@ router.post('/add', async (ctx) => {
     account,
     password,
     character,
+    city,
+    phone,
+    ID_card,
+    type: 1,
   })
 
   const res = await user.save()
@@ -222,11 +233,15 @@ router.post('/addMany', async (ctx) => {
   const arr = []
 
   sheet.forEach((record) => {
-    const [account, password = config.DEFAULT_PASSWORD] = record
+    const [account, password = config.DEFAULT_PASSWORD, city, phone, ID_card] = record
     arr.push({
       account,
       password,
+      city, 
+      phone, 
+      ID_card,
       character: member._id,
+      type: 1,
     })
   })
 
@@ -238,6 +253,29 @@ router.post('/addMany', async (ctx) => {
       addCount: arr.length,
     },
     msg: '添加成功',
+  }
+})
+
+router.post('/quit', async(ctx) => {
+  const {
+    id
+  } = ctx.request.body
+  
+  const user = await User.findOne({_id: id})
+
+  if(!user) {
+    ctx.body = {
+      code: 0,
+      msg: '未找到用户',
+    }
+    return 
+  }
+  user.type = 0
+  const res = await user.save()
+  ctx.body = {
+    code: 1,
+    msg: '员工离职成功',
+    data: res,
   }
 })
 

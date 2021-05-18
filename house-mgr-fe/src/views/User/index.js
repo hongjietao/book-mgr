@@ -9,6 +9,12 @@ import { getCharacterInfoById } from '@/helpers/character'
 import { getHeaders } from '@/helpers/request';
 import store from '@/store'
 
+// city: String, //所在城市
+// phone: String, //手机号
+// ID_card: String, //身份证
+// type: Number, //状态 0:离职， 1: 在职
+
+
 export default defineComponent({
   components:{
     AddOne,
@@ -72,6 +78,15 @@ export default defineComponent({
     const onSearch = () => {
       getUser()
       isSearch.value = true
+    }
+
+    const quit = async ({ _id }) => {
+      const res = await user.quit(_id)
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg)
+          getUser()
+        })
     }
 
     // 查询后返回
@@ -141,6 +156,7 @@ export default defineComponent({
       submit,
       onUploadChange,
       headers: getHeaders(),
+      quit,
     }
   }
 })

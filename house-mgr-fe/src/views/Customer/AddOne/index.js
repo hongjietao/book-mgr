@@ -1,20 +1,21 @@
 import { defineComponent, reactive, onUpdated } from 'vue'
-import { house } from '@/service'
+import { customer } from '@/service'
 import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 import store from '@/store'
 
 const defaultForm = {
-  city: '西京',
-  neighborhood: '春秋小区',
-  floor: 12,
-  floor_plan_room: '3室',
-  area: 129,
-  facing: '西北',
-  type: null, // 类型： 0: 出租，1: 销售
-  price: 120, // 价格： 0: price 元/月,1:price 万元
-  verify: 0, // 审核结果 0: 待审核， 1: 审核通过， 2： 审核不通过
+  name: 'test',
+  phone: '18790310000',
+  ID_card: '41282219980513xxxx',
+  type: null, // 类型： 0: 租房用户，1: 买房页面
   creater: '', // 创建人
+
+// name: String, //客户姓名
+// phone: String, //电话
+// ID_card: String, //身份证
+// type: Number, //类型： 0: 租房用户，1: 买房用户
+// creater: String, // 录入人员
 }
 
 export default defineComponent({
@@ -35,7 +36,7 @@ export default defineComponent({
     const submit = async () => {
       const form = clone(addForm)
       // form.publishDate = addForm.publishDate.valueOf()
-      const res = await house.add(form)
+      const res = await customer.add(form)
 
       result(res)
         .success((d, { data }) => {

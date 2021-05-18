@@ -10,7 +10,12 @@ export default [
     onlyAdmin: false,
   },
   {
-    title: '用户管理 ',
+    title: '客源管理',
+    path: '/customer-list',
+    onlyAdmin: false,
+  },
+  {
+    title: '员工管理 ',
     path: '/user',
     onlyAdmin: true,
   },
