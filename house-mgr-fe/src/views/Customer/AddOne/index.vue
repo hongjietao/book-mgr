@@ -2,7 +2,7 @@
   <div>
     <a-modal
       :visible="props.show"
-      title="添加用户"
+      title="添加客户"
       @ok="submit"
       @cancel="close"
     >
@@ -11,7 +11,7 @@
         <a-form-item label="客户姓名">
           <a-input v-model:value="addForm.name" />
         </a-form-item>
-        <a-form-item label="电话">
+        <a-form-item label="联系方式">
           <a-input v-model:value="addForm.phone"/>
         </a-form-item>
         <a-form-item label="身份证">

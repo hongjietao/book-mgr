@@ -1,9 +1,9 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { result, formatTimestamp } from '@/helpers/utils'
-import { house } from '@/service'
+import { customer } from '@/service'
 import { message } from 'ant-design-vue'
-import Update from '@/views/House/Update/index.vue';
+import Update from '@/views/Customer/Update/index.vue';
 
 export default defineComponent({
   components: {
@@ -19,7 +19,7 @@ export default defineComponent({
     })
 
     const getDetail = async () => {
-      const res = await house.detail(id)
+      const res = await customer.detail(id)
       result(res)
         .success(({ data }) => {
           detailInfo.value = data
@@ -27,12 +27,12 @@ export default defineComponent({
     }
 
     const remove = async () => {
-      const res = await house.remove(id)
+      const res = await customer.remove(id)
 
       result(res)
         .success(({ msg }) => {
           message.success(msg)
-          router.replace("/house-list")
+          router.replace("/customer-list")
         })
     }
 

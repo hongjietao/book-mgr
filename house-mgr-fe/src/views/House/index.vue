@@ -28,11 +28,11 @@
         :scroll="{x: 'max-content'}"
       >
         <template #actions="{record}">
-          <a type="link" @click="toDetail(record)">detail</a>
+          <a type="link" @click="toDetail(record)">详情</a>
           &nbsp;
-          <a type="link" @click="update(record)">edit</a>
+          <a type="link" @click="update(record)">编辑</a>
           &nbsp;
-          <a type="link" @click="remove(record)">delete</a>
+          <a type="link" @click="remove(record)">删除</a>
         </template>
         <template #type="{record}">
           {{+record.type ?'出售' : '出租'}}

@@ -31,11 +31,11 @@
           {{+record.type ?'买房用户' : '租房用户'}}
         </template>
         <template #actions="{record}">
-          <a type="link" @click="toDetail(record)">detail</a>
+          <a type="link" @click="toDetail(record)">详情</a>
           &nbsp;
-          <a type="link" @click="update(record)">edit</a>
+          <a type="link" @click="update(record)">编辑</a>
           &nbsp;
-          <a type="link" @click="remove(record)">delete</a>
+          <a type="link" @click="remove(record)">删除</a>
         </template>
       </a-table>
       <flex-end style="margin-top: 24px" v-if="!simple">
@@ -52,7 +52,7 @@
     />
     <update
       v-model:show="showUpdateModel"
-      :house="curEditHouse"
+      :customer="curEditHouse"
       @update="updateCurHouse"
     />
   </div>

@@ -6,8 +6,8 @@ import store from '@/store'
 
 const defaultForm = {
   name: 'test',
-  phone: '18790310000',
-  ID_card: '41282219980513xxxx',
+  phone: '18790312222',
+  ID_card: '412822199805133333',
   type: null, // 类型： 0: 租房用户，1: 买房页面
   creater: '', // 创建人
 

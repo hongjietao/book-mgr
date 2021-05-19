@@ -26,6 +26,12 @@
         </div>
         <div class="items">
           <div class="item">
+            <div class="title">录入人</div>
+            <div class="content">{{d.creater}}</div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
             <div class="title">城市</div>
             <div class="content">{{d.city}}</div>
           </div>
@@ -50,6 +56,20 @@
           <div class="item">
             <div class="title">朝向</div>
             <div class="content">{{d.facing}}</div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="title">类型</div>
+            <div class="content">{{d.type ?'出售' : '出租'}}</div>
+          </div>
+          <div class="item">
+            <div class="title">价格</div>
+            <div class="content">{{d.price+(+d.type ?'万' : '元/月')}}</div>
+          </div>
+          <div class="item">
+            <div class="title">状态</div>
+            <div class="content">{{verifyResult(d.verify)}}</div>
           </div>
         </div>
       </div>

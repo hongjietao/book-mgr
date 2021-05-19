@@ -28,11 +28,6 @@ export default [
     title: '其它',
     onlyAdmin: false,
     children: [
-      // {
-      //   title: '列表',
-      //   path: '/books',
-      //   onlyAdmin: false,
-      // },
       {
         title: '邀请码',
         path: '/invite-code',
@@ -41,17 +36,13 @@ export default [
       {
         title: '重置密码',
         path: '/reset-password',
-        onlyAdmin: false,
+        onlyAdmin: true,
       },
       {
         title: '个人信息',
         path: '/profile',
         onlyAdmin: false,
       },
-      // {
-      //   title: '已上线房源',
-      //   path: '/add-house',
-      // },
     ]
   },
 ]

@@ -24,6 +24,7 @@
             <a-input
               size="large"
               placeholder="密码: admin"
+              type="password"
               @keypress.enter="login"
               v-model:value="loginForm.password"
             >
@@ -59,6 +60,7 @@
             <a-input
             size="large"
             placeholder="密码"
+            type="password"
             v-model:value="regForm.password"
             >
               <template #prefix>

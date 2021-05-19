@@ -16,16 +16,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "BasicLayout" */ '../layout/BasicLayout/index.vue'),
     children: [
       {
-        path: 'books',
-        name: 'Books',
-        component: () => import(/* webpackChunkName: "Book" */ '../views/Books/index.vue'),
-      },
-      {
-        path: 'books/:id',
-        name: 'BookDetails',
-        component: () => import(/* webpackChunkName: "BookDetails" */ '../views/BookDetails/index.vue'),
-      },
-      {
         path: 'house-list',
         name: 'HouseList',
         component: () => import(/* webpackChunkName: "HouseList" */  '@/views/House/index.vue')

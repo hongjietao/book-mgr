@@ -7,12 +7,13 @@ export const add = (form) => {
     )
  }
 
-export const list = (page = 1, size = 20) => {
+export const list = (page = 1, size = 20, keyword = '') => {
   return get(
     '/customer/list',
     {
       page,
-      size
+      size,
+      keyword,
     },
   )
 }

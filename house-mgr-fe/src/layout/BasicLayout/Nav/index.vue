@@ -14,12 +14,14 @@
             <span>{{item.title}}</span>
           </span>
         </template>
-        <a-menu-item
-          v-if="showMenu(item.onlyAdmin)"
-          :key="childrenItem.path"
-          v-for="childrenItem in item.children"
-          @click="to(childrenItem.path)"
-        >{{childrenItem.title}}</a-menu-item>
+        <div v-for="childrenItem in item.children" @click="to(childrenItem.path)">
+          <a-menu-item
+            :key="childrenItem.path"
+
+            v-if="showMenu(childrenItem.onlyAdmin)"
+          >{{childrenItem.title}}</a-menu-item>
+        </div>
+
       </a-sub-menu>
       <a-menu-item v-else-if="showMenu(item.onlyAdmin)" :key="item.path" @click="to(item.path)">{{item.title}}</a-menu-item>
     </a-menu>

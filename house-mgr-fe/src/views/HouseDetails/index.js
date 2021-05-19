@@ -44,12 +44,23 @@ export default defineComponent({
       getDetail()
     })
 
+    const verifyResult = (verify) => {
+      if(verify === 0) {
+        return '待审核'
+      } else if(verify === 1) {
+        return '审核通过'
+      } else {
+        return '审核不通过'
+      }
+    }
+
     return {
       d: detailInfo,
       remove,
       showUpdateModal,
       update,
       formatTimestamp,
+      verifyResult,
     }
   }
 })

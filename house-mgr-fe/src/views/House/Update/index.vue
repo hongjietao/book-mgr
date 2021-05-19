@@ -25,6 +25,27 @@
         <a-form-item label="朝向">
           <a-input v-model:value="editForm.facing" />
         </a-form-item>
+        <a-form-item label="类型">
+          <a-select
+            v-model:value="editForm.type"
+            style="width: 171px"
+            ref="select"
+          >
+            <a-select-option value=0>出租</a-select-option>
+            <a-select-option value=1>出售</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item label="价格">
+          <a-input
+            style="width: 171px"
+            v-model:value="editForm.price"
+
+            :addon-after="+editForm.type ? '万' : '元/月'"
+            />
+          <!-- <template #addonAfter>
+            {{addForm.type ? '元/月' : '万'}}
+          </template> -->
+        </a-form-item>
       </a-form>
     </a-modal>
   </div>

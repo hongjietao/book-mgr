@@ -65,7 +65,7 @@ router.get('/list', async (ctx) => {
 
   const query = {}
   if(keyword) {
-    query.name = keyword
+    query.neighborhood = keyword
   }
 
   const list = await House

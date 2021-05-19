@@ -2,11 +2,11 @@
   <div>
     <a-modal
       :visible="props.show"
-      title="修改房源信息"
+      title="修改客户信息"
       @ok="submit"
       @cancel="close"
     >
-      <a-form :label-col="{ span: 6}">
+      <!-- <a-form :label-col="{ span: 6}">
         <a-form-item label="城市">
           <a-input v-model:value="editForm.city" />
         </a-form-item>
@@ -25,6 +25,28 @@
         <a-form-item label="朝向">
           <a-input v-model:value="editForm.facing" />
         </a-form-item>
+      </a-form> -->
+      <a-form :label-col="{ span: 6}">
+        <a-form-item label="客户姓名">
+          <a-input v-model:value="editForm.name" />
+        </a-form-item>
+        <a-form-item label="联系方式">
+          <a-input v-model:value="editForm.phone"/>
+        </a-form-item>
+        <a-form-item label="身份证">
+          <a-input v-model:value="editForm.ID_card" />
+        </a-form-item>
+        <a-form-item label="客户类型">
+          <a-select
+            v-model:value="editForm.type"
+            style="width: 171px"
+            ref="select"
+          >
+            <a-select-option value="0">租房用户</a-select-option>
+            <a-select-option value="1">买房用户</a-select-option>
+          </a-select>
+        </a-form-item>
+
       </a-form>
     </a-modal>
   </div>

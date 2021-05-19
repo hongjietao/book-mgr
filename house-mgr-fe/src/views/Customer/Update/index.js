@@ -1,5 +1,5 @@
 import { defineComponent, reactive, watch } from 'vue'
-import { house } from '@/service'
+import { customer } from '@/service'
 import { result, clone } from '@/helpers/utils'
 import { message } from 'ant-design-vue'
 import moment from 'moment'
@@ -7,19 +7,18 @@ import moment from 'moment'
 export default defineComponent({
   props: {
     show: Boolean,
-    house: Object,
+    customer: Object,
   },
   setup(props, context){
     const editForm = reactive({
-      city: '',
-      neighborhood: '',
-      floor: 0,
-      floor_plan_room: '',
-      area: 0,
-      facing: '',
+      name: 'test',
+      phone: '18790312222',
+      ID_card: '412822199805133333',
+      type: null, // 类型： 0: 租房用户，1: 买房页面
+      creater: '', // 创建人
     })
 
-    watch(() => props.house, (cur) => {
+    watch(() => props.customer, (cur) => {
       Object.assign(editForm, cur)
     })
     const close = () => {
@@ -28,15 +27,13 @@ export default defineComponent({
 
     const submit = async () => {
       let requestData = {
-        id: props.house._id,
-        city: editForm.city,
-        neighborhood: editForm.neighborhood,
-        floor: editForm.floor,
-        floor_plan_room: editForm.floor_plan_room,
-        area: editForm.area,
-        facing: editForm.facing,
+        id: props.customer._id,
+        phone: editForm.phone,
+        name: editForm.name,
+        ID_card: editForm.ID_card,
+        type: editForm.type,
       }
-      const res = await house.update(requestData)
+      const res = await customer.update(requestData)
 
       result(res)
         .success(({ data, msg }) => {

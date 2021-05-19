@@ -2,7 +2,7 @@
   <div>
     <a-card>
       <space-between>
-        <h2>房源信息</h2>
+        <h2>客户信息</h2>
         <div>
           <a-button size="small" type="primary" @click="showUpdateModal = true">编辑</a-button>
           &nbsp;
@@ -13,11 +13,35 @@
       <div class="base-info">
         <div class="items">
           <div class="item">
+            <div class="title">姓名</div>
+            <div class="content">{{d.name}}</div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
             <div class="title">编号</div>
             <div class="content">{{d._id}}</div>
           </div>
         </div>
-        <!-- Todo -->
+
+        <div class="items">
+          <div class="item">
+            <div class="title">手机号</div>
+            <div class="content">{{d.phone}}</div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="title">身份证</div>
+            <div class="content">{{d.ID_card}}</div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="title">客户类型</div>
+            <div class="content">{{+d.type ?'买房用户' : '租房用户'}}</div>
+          </div>
+        </div>
         <div class="items">
           <div class="item">
             <div class="title">创建时间</div>
@@ -26,30 +50,8 @@
         </div>
         <div class="items">
           <div class="item">
-            <div class="title">城市</div>
-            <div class="content">{{d.city}}</div>
-          </div>
-          <div class="item">
-            <div class="title">小区</div>
-            <div class="content">{{d.neighborhood}}</div>
-          </div>
-          <div class="item">
-            <div class="title">楼层</div>
-            <div class="content">{{d.floor}}</div>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="title">户型</div>
-            <div class="content">{{d.floor_plan_room}}</div>
-          </div>
-          <div class="item">
-            <div class="title">面积</div>
-            <div class="content">{{d.area}}</div>
-          </div>
-          <div class="item">
-            <div class="title">朝向</div>
-            <div class="content">{{d.facing}}</div>
+            <div class="title">录入人</div>
+            <div class="content">{{d.creater}}</div>
           </div>
         </div>
       </div>

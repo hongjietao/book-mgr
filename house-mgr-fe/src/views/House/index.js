@@ -27,11 +27,13 @@ export default defineComponent({
     const router = useRouter()
 
     if(!props.simple) {
-      const _idx = houseColumns.findIndex((item) => {
+      const _idx1 = houseColumns.findIndex((item) => {
         return item.dataIndex === '_id'
       })
-      console.log(_idx);
-      if(_idx === -1) {
+      const _idx2 = houseColumns.findIndex((item) => {
+        return item.dataIndex === 'actions'
+      })
+      if(_idx1 === -1) {
         houseColumns.unshift(
           {
             title: "编号",
@@ -41,18 +43,20 @@ export default defineComponent({
           }
         )
       }
-      houseColumns.push({
-        title: "actions",
-        // 定宽
-        // width: 90,
-        dataIndex: "actions",
-        slots: {
-          customRender: "actions"
-        }
-      })
+      if(_idx2 === -1) {
+        houseColumns.push({
+          title: "actions",
+          // 定宽
+          // width: 90,
+          dataIndex: "actions",
+          slots: {
+            customRender: "actions"
+          }
+        })
+      }
     }
     const getList = async () => {
-      const res = await house.list(curPage.value, 20)
+      const res = await house.list(curPage.value, 20, keyword.value)
       result(res)
         .success(({ data: { list, total: t} }) => {
           houseList.value = list
@@ -80,7 +84,7 @@ export default defineComponent({
     }
 
     const onSearch = () => {
-      console.log("search");
+      getList()
     }
 
     // 进入详情页面
