@@ -20,7 +20,6 @@ const saveFileToDisk = (ctx, filename) => {
 
 const getUploadFileExt = (ctx) => {
   const { name = '' } = ctx.request.files.file;
-
   return name.split('.').pop();
 };
 
