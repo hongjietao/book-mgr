@@ -73,6 +73,12 @@
           </div>
         </div>
       </div>
+      <a-divider/>
+      <div class="house-status" v-if="verifyResult(d.verify) === '待审核'">
+        <a-button size="small" type="primary" @click="updateVerify(1)">审核通过</a-button>
+          &nbsp;
+          <a-button size="small" type="danger" @click="updateVerify(2)">审核不通过</a-button>
+      </div>
     </a-card>
 
     <!-- <div class="log">

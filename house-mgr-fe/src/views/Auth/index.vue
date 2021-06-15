@@ -3,7 +3,7 @@
     <div class="bg"></div>
     <div class="title-info">
       <img src="@/assets/img/house-icon.png" alt="房源图片">
-      <h2 class="title">房源租售管理系统</h2>
+      <h2 class="title">房屋租售管理系统</h2>
     </div>
 
     <div class="form">

@@ -3,7 +3,7 @@
     <div class="app-header">
       <div class="left">
         <img src="@/assets/img/house-icon.png" alt="房子图标">
-        <div class="title">房源租售管理系统</div>
+        <div class="title">房屋租售管理系统</div>
       </div>
       <div class="right">
         <div class="hello-msg">你好, {{ store.userInfo.account }}</div>
