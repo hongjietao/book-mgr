@@ -45,7 +45,7 @@ export default defineComponent({
       detailInfo.value.id = detailInfo.value._id
       detailInfo.value.verify = verify
       const res = await house.update(detailInfo.value)
-      if(res.data.code === 0) {
+      if(+res.data.data.verify === 1) {
         message.success('审核通过')
       } else {
         message.error('审核不通过')
